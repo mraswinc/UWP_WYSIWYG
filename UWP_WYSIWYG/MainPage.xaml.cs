@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +27,27 @@ namespace UWP_WYSIWYG
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void submitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string result=await InvokeScript();
+            richEditBox.Document.SetText(TextSetOptions.None, result.ToString());
+        }
+
+        private async Task<string> InvokeScript()
+        {
+            string result = "";
+            try
+            {
+                result = await summernoteWebView.InvokeScriptAsync("getHTML", null);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result = "";
+                return result;
+            }
         }
     }
 }

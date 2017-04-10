@@ -8,6 +8,21 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <StackPanel>
+            <Grid>                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <RichEditBox x:Name="richEditBox" Grid.Row="0">                    
+                </RichEditBox>
+                <WebView Margin="0,30,0,0" Grid.Row="1"
+                         x:Name="summernoteWebView"
+                                 MinHeight="150"
+                         Source="ms-appx-web:///Controls/Summernote.html" />
+                <Button Grid.Row="2" x:Name="submitBtn" Content="Submit" Click="submitBtn_Click"></Button>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>
